@@ -1,0 +1,64 @@
+[
+  {
+    "id": "1778571876879",
+    "orderNumber": "ORD-876879-7Z4",
+    "userId": 1778069390873,
+    "userEmail": "gabriel.ngige@student.moringaschool.com",
+    "items": [
+      {
+        "productId": 1,
+        "productName": "Unga wa Mahindi",
+        "quantity": 1,
+        "unitPrice": 140,
+        "totalPrice": 140,
+        "category": "Maize & Flour",
+        "mode": "wholesale"
+      },
+      {
+        "productId": 2,
+        "productName": "Brown Rice",
+        "quantity": 1,
+        "unitPrice": 170,
+        "totalPrice": 170,
+        "category": "Rice",
+        "mode": "wholesale"
+      },
+      {
+        "productId": 4,
+        "productName": "Wheat Flour",
+        "quantity": 1,
+        "unitPrice": 130,
+        "totalPrice": 130,
+        "category": "Wheat",
+        "mode": "wholesale"
+      },
+      {
+        "productId": 3,
+        "productName": "Mixed Beans",
+        "quantity": 1,
+        "unitPrice": 70,
+        "totalPrice": 70,
+        "category": "Beans & Legumes",
+        "mode": "wholesale"
+      }
+    ],
+    "mode": "wholesale",
+    "customerInfo": {
+      "phoneNumber": "+254705247219",
+      "deliveryLocation": "kawangware\n",
+      "notes": ""
+    },
+    "subtotal": 510,
+    "shippingFee": 200,
+    "tax": 82,
+    "total": 792,
+    "paymentMethod": "cash",
+    "paymentStatus": "pending",
+    "orderStatus": "pending",
+    "transactionId": null,
+    "createdAt": "2026-05-12T07:44:36.879Z",
+    "updatedAt": "2026-05-12T07:44:36.879Z",
+    "deliveryLocation": "kawangware\n",
+    "notes": ""
+  }
+]

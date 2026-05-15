@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-vuka-cream font-sans text-gray-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-amber text-white font-medium px-5 py-2.5 rounded-lg hover:bg-amber-dark transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-outline {
+    @apply border-2 border-vuka-green text-vuka-green font-medium px-5 py-2.5 rounded-lg hover:bg-vuka-green hover:text-white transition-all duration-200;
+  }
+  .btn-ghost {
+    @apply text-gray-600 font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-all duration-200;
+  }
+  .input-field {
+    @apply w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-amber transition-colors bg-white;
+  }
+  .card {
+    @apply bg-white rounded-xl border border-gray-100 shadow-sm;
+  }
+  .badge-wholesale {
+    @apply inline-block bg-vuka-green-pale text-vuka-green text-xs font-medium px-2 py-0.5 rounded;
+  }
+  .badge-retail {
+    @apply inline-block bg-amber-pale text-amber-dark text-xs font-medium px-2 py-0.5 rounded;
+  }
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.75rem;
+}

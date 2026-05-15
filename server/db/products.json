@@ -1,0 +1,8 @@
+[
+  { "id": 1, "name": "Unga wa Mahindi", "category": "Maize & Flour", "weight": "2kg", "retailPrice": 180, "wholesalePrice": 140, "stock": 200, "emoji": "🌽", "badge": "Popular", "image": null },
+  { "id": 2, "name": "Brown Rice",      "category": "Rice",            "weight": "1kg", "retailPrice": 210, "wholesalePrice": 170, "stock": 150, "emoji": "🌾", "badge": null,      "image": null },
+  { "id": 3, "name": "Mixed Beans",     "category": "Beans & Legumes", "weight": "500g","retailPrice": 95,  "wholesalePrice": 70,  "stock": 300, "emoji": "🫘", "badge": "New",      "image": null },
+  { "id": 4, "name": "Wheat Flour",     "category": "Wheat",           "weight": "2kg", "retailPrice": 165, "wholesalePrice": 130, "stock": 180, "emoji": "🌾", "badge": null,      "image": null },
+  { "id": 5, "name": "Sorghum",         "category": "Sorghum",         "weight": "1kg", "retailPrice": 120, "wholesalePrice": 90,  "stock": 100, "emoji": "🌿", "badge": null,      "image": null },
+  { "id": 6, "name": "Finger Millet",   "category": "Millet",          "weight": "1kg", "retailPrice": 140, "wholesalePrice": 110, "stock": 80,  "emoji": "🌱", "badge": "Organic", "image": null }
+]

@@ -1,0 +1,18 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gold circular background -->
+  <circle cx="100" cy="100" r="100" fill="#F4B942"/>
+  
+  <!-- White V shape -->
+  <path d="M 70 70 L 100 150 L 130 70" fill="none" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="70,70 100,150 130,70 120,65 100,135 80,65" fill="white"/>
+  
+  <!-- Green leaf design -->
+  <g transform="translate(100, 50)">
+    <!-- Left leaf curve -->
+    <path d="M -15 0 Q -25 10 -20 25 Q -15 20 -10 15" fill="#2D6E35" stroke="#2D6E35" stroke-width="2"/>
+    <!-- Right leaf curve -->
+    <path d="M 15 0 Q 25 10 20 25 Q 15 20 10 15" fill="#1a4d2e" stroke="#2D6E35" stroke-width="2"/>
+    <!-- Center accent -->
+    <ellipse cx="0" cy="8" rx="8" ry="12" fill="#2D6E35" opacity="0.8"/>
+  </g>
+</svg>
