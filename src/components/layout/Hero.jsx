@@ -1,14 +1,28 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useCartStore } from '../../store/index.js';
+import { useCartStore, useProductStore } from '../../store/index.js';
 
-const featured = [
-  { emoji: '🌽', name: 'Maize Meal — 2kg', price: 'KES 180', tag: 'Retail' },
-  { emoji: '🌾', name: 'Brown Rice — 25kg', price: 'KES 3,200', tag: 'Wholesale' },
-  { emoji: '🫘', name: 'Mixed Beans — 10kg', price: 'KES 1,450', tag: 'Wholesale' },
+const FALLBACK = [
+  { id: 'f1', emoji: '🌽', name: 'Maize Meal — 2kg', retailPrice: 180, category: 'Retail' },
+  { id: 'f2', emoji: '🌾', name: 'Brown Rice — 25kg', retailPrice: 3200, category: 'Wholesale' },
+  { id: 'f3', emoji: '🫘', name: 'Mixed Beans — 10kg', retailPrice: 1450, category: 'Wholesale' },
 ];
+
+function pickRandom(arr, n) {
+  return [...arr].sort(() => Math.random() - 0.5).slice(0, n);
+}
 
 export default function Hero() {
   const setMode = useCartStore((s) => s.setMode);
+  const mode = useCartStore((s) => s.mode);
+  const { products, fetchProducts } = useProductStore();
+  const [featured, setFeatured] = useState([]);
+
+  useEffect(() => { fetchProducts(); }, []);
+
+  useEffect(() => {
+    if (products.length > 0) setFeatured(pickRandom(products, 3));
+  }, [products]);
 
   return (
     <div className="bg-gradient-to-br from-vuka-green to-[#1A4A22] px-6 py-12">
@@ -48,16 +62,21 @@ export default function Hero() {
         {/* Featured card */}
         <div className="w-full lg:w-72 bg-white/8 border border-white/15 rounded-2xl p-5 space-y-3 backdrop-blur-sm">
           <p className="text-white/50 text-[11px] font-medium uppercase tracking-wider">Featured Products</p>
-          {featured.map((p) => (
-            <div key={p.name} className="bg-white/10 rounded-xl p-3 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-amber/20 flex items-center justify-center text-2xl">{p.emoji}</div>
-              <div className="flex-1 min-w-0">
-                <p className="text-white text-xs font-medium truncate">{p.name}</p>
-                <p className="text-amber text-xs">{p.price}</p>
+          {(featured.length > 0 ? featured : FALLBACK).map((p) => {
+            const price = mode === 'wholesale' && p.wholesalePrice ? p.wholesalePrice : p.retailPrice;
+            return (
+              <div key={p.id} className="bg-white/10 rounded-xl p-3 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-amber/20 flex items-center justify-center text-2xl overflow-hidden">
+                  {p.image ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" /> : (p.emoji || '📦')}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white text-xs font-medium truncate">{p.name}</p>
+                  <p className="text-amber text-xs">KES {price?.toLocaleString()}</p>
+                </div>
+                <span className="text-[10px] bg-vuka-green/60 text-green-200 px-2 py-0.5 rounded-full flex-shrink-0">{p.category}</span>
               </div>
-              <span className="text-[10px] bg-vuka-green/60 text-green-200 px-2 py-0.5 rounded-full flex-shrink-0">{p.tag}</span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

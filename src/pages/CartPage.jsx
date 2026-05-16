@@ -92,11 +92,7 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between text-gray-600 py-2 border-t border-gray-50">
                 <span>Shipping</span>
-                <span>KES {summary.shippingFee.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-gray-600">
-                <span>Tax (16%)</span>
-                <span>KES {summary.tax.toLocaleString()}</span>
+                <span className="text-vuka-green font-medium">Free</span>
               </div>
               <div className="flex justify-between font-semibold text-base border-t border-gray-100 pt-2">
                 <span>Total</span>

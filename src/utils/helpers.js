@@ -63,16 +63,7 @@ export const generateOrderNumber = () => {
  */
 export const calculateOrderSummary = (items) => {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const shippingFee = 200; // Fixed shipping fee
-  const tax = Math.round(subtotal * 0.16); // 16% VAT
-  const total = subtotal + shippingFee + tax;
-
-  return {
-    subtotal,
-    shippingFee,
-    tax,
-    total,
-  };
+  return { subtotal, total: subtotal };
 };
 
 /**

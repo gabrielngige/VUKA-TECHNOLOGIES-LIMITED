@@ -137,11 +137,7 @@ export default function CheckoutModal({ isOpen, onClose, onOrderCreated }) {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Shipping</span>
-                  <span className="font-medium">KES {summary.shippingFee.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Tax (16%)</span>
-                  <span className="font-medium">KES {summary.tax.toLocaleString()}</span>
+                  <span className="font-medium text-vuka-green">Free</span>
                 </div>
                 <div className="flex justify-between border-t border-vuka-green/20 pt-2 font-semibold text-base">
                   <span>Total</span>
