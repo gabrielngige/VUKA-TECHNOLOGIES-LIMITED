@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
+import { GoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useAuthStore } from '../store/index.js'
+import { authAPI } from '../utils/api.js'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -12,6 +14,17 @@ export default function LoginPage() {
   const [showPw,   setShowPw]   = useState(false)
   const [loading,  setLoading]  = useState(false)
   const [form,     setForm]     = useState({ name:'', email:'', password:'' })
+
+  const handleGoogle = async (credentialResponse) => {
+    try {
+      const data = await authAPI.googleLogin(credentialResponse.credential)
+      login(data.user, data.token)
+      toast.success('Welcome!')
+      navigate(data.user.role === 'admin' ? '/admin' : '/')
+    } catch {
+      toast.error('Google sign-in failed. Please try again.')
+    }
+  }
 
   const handle = async () => {
     if (!form.email || !form.password) { toast.error('Fill in all fields'); return }
@@ -104,6 +117,25 @@ export default function LoginPage() {
             {loading && <Loader2 size={16} className="animate-spin"/>}
             {tab === 'login' ? 'Sign In' : 'Create Account'}
           </button>
+
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-px bg-gray-100"/>
+            <span className="text-xs text-gray-400">or</span>
+            <div className="flex-1 h-px bg-gray-100"/>
+          </div>
+
+          <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogle}
+              onError={() => toast.error('Google sign-in failed. Please try again.')}
+              text={tab === 'login' ? 'signin_with' : 'signup_with'}
+              shape="rectangular"
+              logo_alignment="center"
+              width={320}
+              locale="en"
+              use_fedcm_for_prompt={false}
+            />
+          </div>
 
           {tab === 'login' && (
             <p className="text-center text-xs text-gray-400">

@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Vuka Admin",
     "email": "admin@vuka.co.ke",
-    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "password": "$2a$10$mPWm8KtEm5jkONNorax8FediU3.1EIv3FnbpuBOOJVONFpK5lmPU6",
     "role": "admin",
     "createdAt": "2026-01-01T00:00:00.000Z"
   },

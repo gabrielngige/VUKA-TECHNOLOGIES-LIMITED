@@ -16,7 +16,7 @@ db.exec(`
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
     name      TEXT    NOT NULL,
     email     TEXT    NOT NULL UNIQUE,
-    password  TEXT    NOT NULL,
+    password  TEXT,
     role      TEXT    NOT NULL DEFAULT 'customer',
     createdAt TEXT    NOT NULL DEFAULT (datetime('now'))
   );
@@ -136,3 +136,10 @@ const migrate = db.transaction(() => {
 });
 
 migrate();
+
+// Add google_id column if it doesn't exist yet (idempotent)
+try {
+  db.exec(`ALTER TABLE users ADD COLUMN google_id TEXT`);
+} catch {
+  // Column already exists — safe to ignore
+}

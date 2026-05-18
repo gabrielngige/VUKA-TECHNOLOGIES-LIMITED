@@ -29,8 +29,9 @@ apiClient.interceptors.response.use(
 );
 
 export const authAPI = {
-  register: (name, email, password) => apiClient.post('/auth/register', { name, email, password }),
-  login:    (email, password)        => apiClient.post('/auth/login',    { email, password }),
+  register:    (name, email, password) => apiClient.post('/auth/register', { name, email, password }),
+  login:       (email, password)       => apiClient.post('/auth/login',    { email, password }),
+  googleLogin: (credential)            => apiClient.post('/auth/google',   { credential }).then(r => r.data),
 };
 
 export const productsAPI = {

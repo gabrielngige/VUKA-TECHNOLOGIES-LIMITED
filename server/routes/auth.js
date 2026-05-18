@@ -1,8 +1,11 @@
 import express   from 'express';
 import bcrypt    from 'bcryptjs';
 import jwt       from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library';
 import { db }   from '../db/database.js';
 import { asyncHandler } from '../middleware/auth.js';
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const router = express.Router();
 
@@ -42,6 +45,36 @@ router.post('/login', asyncHandler(async (req, res) => {
   if (!match) return res.status(401).json({ message: 'Invalid credentials' });
 
   const { password: _, ...safe } = user;
+  res.json({ user: safe, token: sign(user) });
+}));
+
+// POST /api/auth/google
+router.post('/google', asyncHandler(async (req, res) => {
+  const { credential } = req.body;
+  if (!credential) return res.status(400).json({ message: 'Google credential required' });
+
+  const ticket = await googleClient.verifyIdToken({
+    idToken: credential,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  });
+  const { sub: googleId, email, name, picture } = ticket.getPayload();
+
+  let user = db.prepare('SELECT * FROM users WHERE google_id = ? OR email = ?').get(googleId, email);
+
+  if (user) {
+    // Link google_id if this email was registered without OAuth
+    if (!user.google_id) {
+      db.prepare('UPDATE users SET google_id = ? WHERE id = ?').run(googleId, user.id);
+      user = { ...user, google_id: googleId };
+    }
+  } else {
+    const result = db.prepare(
+      'INSERT INTO users (name, email, password, role, google_id, createdAt) VALUES (?, ?, NULL, ?, ?, ?)'
+    ).run(name, email, 'customer', googleId, new Date().toISOString());
+    user = { id: result.lastInsertRowid, name, email, role: 'customer', google_id: googleId };
+  }
+
+  const { password: _, google_id: __, ...safe } = user;
   res.json({ user: safe, token: sign(user) });
 }));
 
